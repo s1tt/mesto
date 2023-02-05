@@ -1,0 +1,9 @@
+.profile__job {
+  margin: 0;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #ffffff;
+  grid-column: 1 / 3;
+  /* grid-row: 1/3; */
+}

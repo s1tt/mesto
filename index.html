@@ -5,13 +5,87 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./pages/index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&display=swap"
+      rel="stylesheet"
+    />
     <title>Mesto</title>
   </head>
   <body class="page page__center">
     <header class="header">
       <img src="./images/Header__logo.svg" alt="Логотип сайта" class="header__logo" />
     </header>
-    <main class="content"></main>
+    <main class="content">
+      <section class="profile">
+        <div class="profile__info">
+          <img src="./images/profile__img.jpg" alt="Аватар" class="profile__img" />
+          <div class="profile__text-info">
+            <p class="profile__name">Жак-Ив Кусто</p>
+            <button class="profile__edit-button">
+              <img
+                src="./images/profile__edit-button.svg"
+                alt="Иконка кнопки Редактировать"
+                class="profile__edit-button-img"
+              />
+            </button>
+            <p class="profile__job">Исследователь океана</p>
+          </div>
+        </div>
+        <button class="profile__add-button">
+          <img
+            src="./images/profile__add-button.svg"
+            alt="Иконка кнопки Добавить"
+            class="profile__add-button-img"
+          />
+        </button>
+      </section>
+      <section class="elements">
+        <div class="element">
+          <img src="./images/karacha.jpg" alt="Карачаевск" class="element__img" />
+          <div class="element__discription">
+            <p class="element title">Карачаевск</p>
+            <img src="./images/like.svg" alt="Лайк" class="elemetn__like-ico" />
+          </div>
+        </div>
+        <div class="element">
+          <img src="./images/elbr.jpg" alt="Гора Эльбрус" class="element__img" />
+          <div class="element__discription">
+            <p class="element title">Гора Эльбрус</p>
+            <img src="./images/like.svg" alt="Лайк" class="elemetn__like-ico" />
+          </div>
+        </div>
+        <div class="element">
+          <img src="./images/domba.jpg" alt="Домбай" class="element__img" />
+          <div class="element__discription">
+            <p class="element title">Домбай</p>
+            <img src="./images/like.svg" alt="Лайк" class="elemetn__like-ico" />
+          </div>
+        </div>
+        <div class="element">
+          <img src="./images/elbrus.jpg" alt="Гора Эльбрус" class="element__img" />
+          <div class="element__discription">
+            <p class="element title">Гора Эльбрус</p>
+            <img src="./images/like.svg" alt="Лайк" class="elemetn__like-ico" />
+          </div>
+        </div>
+        <div class="element">
+          <img src="./images/dombai.jpg" alt="Домбай" class="element__img" />
+          <div class="element__discription">
+            <p class="element title">Домбай</p>
+            <img src="./images/like.svg" alt="Лайк" class="elemetn__like-ico" />
+          </div>
+        </div>
+        <div class="element">
+          <img src="./images/karachae-cher.jpg" alt="Карачаево-Черкессия" class="element__img" />
+          <div class="element__discription">
+            <p class="element title">Карачаево-Черкессия</p>
+            <img src="./images/like.svg" alt="Лайк" class="elemetn__like-ico" />
+          </div>
+        </div>
+      </section>
+    </main>
     <foote class="footer"></foote>
   </body>
 </html>
