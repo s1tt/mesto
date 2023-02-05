@@ -28,3 +28,6 @@
 @import url('../blocks/element/__like-ico/element__like-ico.css');
 @import url('../blocks/element/__like-ico/_active/element__like-ico_active.css');
 @import url('../blocks/element/__title/element__title.css');
+
+@import url('../blocks/footer/footer.css');
+@import url('../blocks/footer/__text/footer__text.css');
