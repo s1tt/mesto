@@ -1,0 +1,10 @@
+.popup__close-ico {
+  position: relative;
+  bottom: 189px;
+  left: 7px;
+}
+
+.popup__close-ico:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
