@@ -11,6 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&display=swap"
       rel="stylesheet"
     />
+    <script src="./blocks/popup/popup.js" defer></script>
     <title>Mesto</title>
   </head>
   <body class="page center">
@@ -89,13 +90,17 @@
           </div>
         </div>
       </section>
-      <div class="popup popup_opened">
+      <div class="popup">
         <div class="popup__container">
           <form action="#" class="popup__form">
             <fieldset class="popup__fieldset">
               <legend class="popup__title">Редактировать профиль</legend>
-              <input class="popup__input" type="text" value="Жак-Ив Кусто" />
-              <input class="popup__input" type="text" value="Исследователь океана" />
+              <input class="popup__input popup__input-name" type="text" value="Жак-Ив Кусто" />
+              <input
+                class="popup__input popup__input-job"
+                type="text"
+                value="Исследователь океана"
+              />
             </fieldset>
             <button class="popup__btn" type="submit">Сохранить</button>
           </form>

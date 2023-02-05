@@ -4,4 +4,7 @@
   font-size: 42px;
   line-height: 48px;
   color: #ffffff;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
