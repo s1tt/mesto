@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="./pages/index.css" />
     <title>Mesto</title>
   </head>
-
-  <body class="page center">
+  <body class="page">
     <header class="header">
       <img src="./images/Header__logo.svg" alt="Логотип сайта" class="header__logo" />
     </header>
@@ -17,94 +16,74 @@
         <div class="profile__info">
           <img src="./images/profile__img.jpg" alt="Аватар" class="profile__img" />
           <div class="profile__text-info">
-            <p class="profile__name">Жак-Ив Кусто</p>
-            <button class="profile__edit-button">
-              <img
-                src="./images/profile__edit-button.svg"
-                alt="Иконка кнопки Редактировать"
-                class="profile__edit-button-img"
-              />
-            </button>
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button class="profile__edit-button" type="submit" aria-label="Редактировать профиль"></button>
             <p class="profile__job">Исследователь океана</p>
           </div>
         </div>
-        <button class="profile__add-button">
-          <img
-            src="./images/profile__add-button.svg"
-            alt="Иконка кнопки Добавить"
-            class="profile__add-button-img"
-          />
-        </button>
+        <button class="profile__add-button" type="submit" aria-label="Кнопка добавить"></button>
       </section>
       <section class="elements">
-        <div class="element">
+        <article class="element">
           <img src="./images/karacha.jpg" alt="Карачаевск" class="element__img" />
           <div class="element__description">
-            <p class="element__title">Карачаевск</p>
-            <img
-              src="./images/like.svg"
-              alt="Лайк"
-              class="element__like-ico element__like-ico_active"
-            />
+            <h2 class="element__title">Карачаевск</h2>
+            <button class="element__like-btn" type="submit" aria-label="Лайк"></button>
           </div>
-        </div>
-        <div class="element">
+        </article>
+        <article class="element">
           <img src="./images/elbr.jpg" alt="Гора Эльбрус" class="element__img" />
           <div class="element__description">
-            <p class="element__title">Гора Эльбрус</p>
-            <img src="./images/like.svg" alt="Лайк" class="element__like-ico" />
+            <h2 class="element__title">Гора Эльбрус</h2>
+            <button class="element__like-btn" type="submit" aria-label="Лайк"></button>
           </div>
-        </div>
-        <div class="element">
+        </article>
+        <article class="element">
           <img src="./images/domba.jpg" alt="Домбай" class="element__img" />
           <div class="element__description">
-            <p class="element__title">Домбай</p>
-            <img src="./images/like.svg" alt="Лайк" class="element__like-ico" />
+            <h2 class="element__title">Домбай</h2>
+            <button class="element__like-btn" type="submit" aria-label="Лайк"></button>
           </div>
-        </div>
-        <div class="element">
+        </article>
+        <article class="element">
           <img src="./images/elbrus.jpg" alt="Гора Эльбрус" class="element__img" />
           <div class="element__description">
-            <p class="element__title">Гора Эльбрус</p>
-            <img src="./images/like.svg" alt="Лайк" class="element__like-ico" />
+            <h2 class="element__title">Гора Эльбрус</h2>
+            <button class="element__like-btn" type="submit" aria-label="Лайк"></button>
           </div>
-        </div>
-        <div class="element">
+        </article>
+        <article class="element">
           <img src="./images/dombai.jpg" alt="Домбай" class="element__img" />
           <div class="element__description">
-            <p class="element__title">Домбай</p>
-            <img src="./images/like.svg" alt="Лайк" class="element__like-ico" />
+            <h2 class="element__title">Домбай</h2>
+            <button class="element__like-btn" type="submit" aria-label="Лайк"></button>
           </div>
-        </div>
-        <div class="element">
+        </article>
+        <article class="element">
           <img src="./images/karachae-cher.jpg" alt="Карачаево-Черкессия" class="element__img" />
           <div class="element__description">
-            <p class="element__title">Карачаево-Черкессия</p>
-            <img src="./images/like.svg" alt="Лайк" class="element__like-ico" />
+            <h2 class="element__title">Карачаево-Черкессия</h2>
+            <button class="element__like-btn" type="button" aria-label="Лайк"></button>
           </div>
-        </div>
+        </article>
       </section>
-      <div class="popup">
-        <div class="popup__container">
-          <form action="#" class="popup__form">
-            <fieldset class="popup__fieldset">
-              <legend class="popup__title">Редактировать профиль</legend>
-              <input class="popup__input popup__input-name" type="text" value="Жак-Ив Кусто" />
-              <input
-                class="popup__input popup__input-job"
-                type="text"
-                value="Исследователь океана"
-              />
-            </fieldset>
-            <button class="popup__btn" type="submit">Сохранить</button>
-          </form>
-        </div>
-        <img src="./images/popup__close.svg" alt="Закрыть окно" class="popup__close-ico" />
-      </div>
     </main>
     <footer class="footer">
       <p class="footer__text">&copy; 2023 Mesto Russia</p>
     </footer>
-    <script src="./pages/index.js"></script>
+    <div class="popup">
+      <div class="popup__container">
+        <form action="#" name="editProfileForm" class="popup__form">
+          <fieldset class="popup__fieldset">
+            <legend class="popup__title">Редактировать профиль</legend>
+            <input class="popup__input popup__input_value_name" type="text" value="Жак-Ив Кусто" name="name" />
+            <input class="popup__input popup__input_value_job" type="text" value="Исследователь океана" name="job" />
+          </fieldset>
+          <button class="popup__btn" type="submit">Сохранить</button>
+        </form>
+      </div>
+      <button class="popup__close-btn" type="button" aria-label="Закрыть всплывающее окно"></button>
+    </div>
+    <script src="./scripts/index.js"></script>
   </body>
 </html>

@@ -17,7 +17,5 @@
 @media screen and (max-width: 600px) {
   .elements {
     grid-template-columns: 282px;
-    justify-content: center;
-    margin-bottom: 48px;
   }
 }

@@ -9,7 +9,6 @@
   .header {
     padding-bottom: 31px;
     margin-top: 28px;
-    margin-bottom: 40px;
     padding-left: 27px;
   }
 }
@@ -17,8 +16,6 @@
 @media screen and (max-width: 600px) {
   .header {
     padding-bottom: 27px;
-    margin-top: 28px;
     margin-bottom: 42px;
-    padding-left: 27px;
   }
 }
