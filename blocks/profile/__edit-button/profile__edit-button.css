@@ -1,9 +1,6 @@
 .profile__edit-button {
-  position: relative;
-  top: 15px;
-  height: 24px;
-  width: 24px;
-  border: 1px solid #fff;
+  padding: 0;
+  border: none;
   background-color: #000;
   cursor: pointer;
 }

@@ -8,3 +8,11 @@
   opacity: 0.6;
   cursor: pointer;
 }
+
+@media screen and (max-width: 600px) {
+  .popup__close-ico {
+    width: 20px;
+    bottom: 359px;
+    left: 132px;
+  }
+}

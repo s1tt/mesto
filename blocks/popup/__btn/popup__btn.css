@@ -1,5 +1,6 @@
 .popup__btn {
-  padding: 12px 130px;
+  padding: 14px 132px;
+  border: none;
   background-color: #000;
   color: #fff;
   font-size: 18px;
@@ -11,4 +12,13 @@
 .popup__btn:hover {
   opacity: 0.8;
   cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .popup__btn {
+    padding: 14px 82px;
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 16px;
+  }
 }

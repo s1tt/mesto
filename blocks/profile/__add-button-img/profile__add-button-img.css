@@ -1,0 +1,19 @@
+.profile__add-button-img {
+  padding: 14px 64px;
+  border: 2px solid #fff;
+  border-radius: 2px;
+  background-color: #000;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 984px) {
+  .profile__add-button-img {
+    padding: 17px 133px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .profile__add-button-img {
+    padding: 13px 129px;
+  }
+}
