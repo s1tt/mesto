@@ -1,7 +1,7 @@
 .element__like-btn {
   padding: 0;
   border: none;
-  background-color: #fff;
+  background-color: transparent;
   cursor: pointer;
   height: 19px;
   width: 22px;
