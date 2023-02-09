@@ -24,7 +24,7 @@
         <button class="profile__add-button" type="button" aria-label="Кнопка добавить"></button>
       </section>
       <section class="elements">
-        <template id="element">
+        <template id="card">
           <article class="element">
             <img src="" alt="" class="element__img" />
             <button class="element__trash-btn" type="button" aria-label="Удалить картинку"></button>
@@ -39,7 +39,7 @@
     <footer class="footer">
       <p class="footer__text">&copy; 2023 Mesto Russia</p>
     </footer>
-    <div class="popup popup__edit">
+    <div class="popup popup_type_edit-profile">
       <div class="popup__container">
         <form action="#" name="editProfileForm" class="popup__form popup__form-edit">
           <fieldset class="popup__fieldset">
@@ -53,7 +53,7 @@
       </div>
     </div>
 
-    <div class="popup popup__add">
+    <div class="popup popup_type_add-card">
       <div class="popup__container">
         <form action="#" name="addImage" class="popup__form popup__form-add">
           <fieldset class="popup__fieldset">
@@ -67,17 +67,13 @@
       </div>
     </div>
 
-    <template id="popup-img">
-      <div class="popup popup-img">
-        <!-- <div class="xz" style="position: relative"> -->
-        <figure class="popup-img__figure-img">
-          <img src="" alt="" class="popup-img__img" />
-          <figcaption class="popup-img__figcaption-img"></figcaption>
+    <template id="popup-view-image">
+      <div class="popup popup_type_view-image">
+        <figure class="popup__view-image-figure">
+          <img src="" alt="" class="popup__view-image-item" />
+          <figcaption class="popup-img__figcaption-img popup__view-image-figcaption"></figcaption>
           <button class="popup__close-btn" type="button" aria-label="Закрыть всплывающее окно"></button>
         </figure>
-        <!-- ДОДЕЛАТЬ НОРМАЛЬНО -->
-        <!-- </div> -->
-        <!-- popup-img__close-btn-img -->
       </div>
     </template>
     <script src="./scripts/index.js"></script>
