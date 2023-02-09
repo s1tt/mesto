@@ -24,56 +24,24 @@
         <button class="profile__add-button" type="button" aria-label="Кнопка добавить"></button>
       </section>
       <section class="elements">
-        <article class="element">
-          <img src="./images/karacha.jpg" alt="Карачаевск" class="element__img" />
-          <div class="element__description">
-            <h2 class="element__title">Карачаевск</h2>
-            <button class="element__like-btn" type="button" aria-label="Лайк"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img src="./images/elbr.jpg" alt="Гора Эльбрус" class="element__img" />
-          <div class="element__description">
-            <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="element__like-btn" type="button" aria-label="Лайк"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img src="./images/domba.jpg" alt="Домбай" class="element__img" />
-          <div class="element__description">
-            <h2 class="element__title">Домбай</h2>
-            <button class="element__like-btn" type="button" aria-label="Лайк"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img src="./images/elbrus.jpg" alt="Гора Эльбрус" class="element__img" />
-          <div class="element__description">
-            <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="element__like-btn" type="button" aria-label="Лайк"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img src="./images/dombai.jpg" alt="Домбай" class="element__img" />
-          <div class="element__description">
-            <h2 class="element__title">Домбай</h2>
-            <button class="element__like-btn" type="button" aria-label="Лайк"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img src="./images/karachae-cher.jpg" alt="Карачаево-Черкессия" class="element__img" />
-          <div class="element__description">
-            <h2 class="element__title">Карачаево-Черкессия</h2>
-            <button class="element__like-btn" type="button" aria-label="Лайк"></button>
-          </div>
-        </article>
+        <template id="element">
+          <article class="element">
+            <img src="" alt="" class="element__img" />
+            <button class="element__trash-btn" type="button" aria-label="Удалить картинку"></button>
+            <div class="element__description">
+              <h2 class="element__title"></h2>
+              <button class="element__like-btn" type="button" aria-label="Лайк"></button>
+            </div>
+          </article>
+        </template>
       </section>
     </main>
     <footer class="footer">
       <p class="footer__text">&copy; 2023 Mesto Russia</p>
     </footer>
-    <div class="popup">
+    <div class="popup popup__edit">
       <div class="popup__container">
-        <form action="#" name="editProfileForm" class="popup__form">
+        <form action="#" name="editProfileForm" class="popup__form popup__form-edit">
           <fieldset class="popup__fieldset">
             <legend class="popup__title">Редактировать профиль</legend>
             <input class="popup__input popup__input_value_name" type="text" value="Жак-Ив Кусто" name="name" />
@@ -81,9 +49,37 @@
           </fieldset>
           <button class="popup__btn" type="submit">Сохранить</button>
         </form>
+        <button class="popup__close-btn" type="button" aria-label="Закрыть всплывающее окно"></button>
       </div>
-      <button class="popup__close-btn" type="button" aria-label="Закрыть всплывающее окно"></button>
     </div>
+
+    <div class="popup popup__add">
+      <div class="popup__container">
+        <form action="#" name="addImage" class="popup__form popup__form-add">
+          <fieldset class="popup__fieldset">
+            <legend class="popup__title">Новое место</legend>
+            <input class="popup__input popup__input_value_img-title" type="text" placeholder="Название" name="img-title" />
+            <input class="popup__input popup__input_value_img-link" type="text" placeholder="Ссылка на картинку" name="img-link" />
+          </fieldset>
+          <button class="popup__btn" type="submit">Создать</button>
+        </form>
+        <button class="popup__close-btn" type="button" aria-label="Закрыть всплывающее окно"></button>
+      </div>
+    </div>
+
+    <template id="popup-img">
+      <div class="popup popup-img">
+        <!-- <div class="xz" style="position: relative"> -->
+        <figure class="popup-img__figure-img">
+          <img src="" alt="" class="popup-img__img" />
+          <figcaption class="popup-img__figcaption-img"></figcaption>
+          <button class="popup__close-btn" type="button" aria-label="Закрыть всплывающее окно"></button>
+        </figure>
+        <!-- ДОДЕЛАТЬ НОРМАЛЬНО -->
+        <!-- </div> -->
+        <!-- popup-img__close-btn-img -->
+      </div>
+    </template>
     <script src="./scripts/index.js"></script>
   </body>
 </html>

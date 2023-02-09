@@ -8,9 +8,9 @@
   background-image: url('../../../images/popup__close.svg');
   background-repeat: no-repeat;
   background-position: center;
-  position: relative;
-  bottom: 190px;
-  right: -7px;
+  position: absolute;
+  top: -40px;
+  right: -40px;
 }
 
 .popup__close-btn:hover {
@@ -22,7 +22,7 @@
     width: 20px;
     height: 20px;
     background-size: contain;
-    top: -17px;
-    left: 130px;
+    top: -36px;
+    right: 0;
   }
 }

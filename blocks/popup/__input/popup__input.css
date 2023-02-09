@@ -9,3 +9,9 @@
   width: 100%;
   margin-bottom: 29px;
 }
+
+.popup__input::placeholder {
+  font-size: 14px;
+  line-height: 17px;
+  color: #c4c4c4;
+}
