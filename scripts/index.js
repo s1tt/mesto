@@ -89,13 +89,11 @@ function openPopupEditProfile() {
 }
 //Закрыть попап
 function closePopupEditProfile() {
-  console.log('click!');
   popups.editProfile.classList.remove('popup_opened');
   popups.editProfile.classList.add('popup_closed');
 }
 
 function closePopupAddCard() {
-  console.log('click!!');
   popups.addCard.classList.remove('popup_opened');
   popups.addCard.classList.add('popup_closed');
 }
