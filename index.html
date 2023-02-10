@@ -23,58 +23,54 @@
         </div>
         <button class="profile__add-button" type="button" aria-label="Кнопка добавить"></button>
       </section>
-      <section class="elements">
-        <template id="card">
-          <article class="element">
-            <img src="#" alt="" class="element__img" />
-            <button class="element__trash-btn" type="button" aria-label="Удалить картинку"></button>
-            <div class="element__description">
-              <h2 class="element__title"></h2>
-              <button class="element__like-btn" type="button" aria-label="Лайк"></button>
-            </div>
-          </article>
-        </template>
-      </section>
+      <section class="elements"></section>
     </main>
     <footer class="footer">
       <p class="footer__text">&copy; 2023 Mesto Russia</p>
     </footer>
+
+    <template id="card">
+      <article class="element">
+        <img src="#" alt="" class="element__img" />
+        <button class="element__trash-btn" type="button" aria-label="Удалить картинку"></button>
+        <div class="element__description">
+          <h2 class="element__title"></h2>
+          <button class="element__like-btn" type="button" aria-label="Лайк"></button>
+        </div>
+      </article>
+    </template>
+
     <div class="popup popup_type_edit-profile">
       <div class="popup__container">
+        <h2 class="popup__title">Редактировать профиль</h2>
         <form action="#" name="editProfileForm" class="popup__form popup__form-edit">
-          <fieldset class="popup__fieldset">
-            <legend class="popup__title">Редактировать профиль</legend>
-            <input class="popup__input popup__input_value_name" type="text" value="Жак-Ив Кусто" name="name" />
-            <input class="popup__input popup__input_value_job" type="text" value="Исследователь океана" name="job" />
-          </fieldset>
+          <input class="popup__input popup__input_value_name" type="text" placeholder="Имя" name="name" />
+          <input class="popup__input popup__input_value_job" type="text" placeholder="О себе" name="job" />
           <button class="popup__btn" type="submit">Сохранить</button>
         </form>
-        <button class="popup__close-btn" type="button" aria-label="Закрыть всплывающее окно"></button>
+        <button class="popup__close-btn" type="button" aria-label="Закрыть всплывающее окно" data-popup="editProfile"></button>
       </div>
     </div>
+
     <div class="popup popup_type_add-card">
       <div class="popup__container">
+        <h2 class="popup__title">Новое место</h2>
         <form action="#" name="addImage" class="popup__form popup__form-add">
-          <fieldset class="popup__fieldset">
-            <legend class="popup__title">Новое место</legend>
-            <input class="popup__input popup__input_value_img-title" type="text" placeholder="Название" name="img-title" />
-            <input class="popup__input popup__input_value_img-link" type="text" placeholder="Ссылка на картинку" name="img-link" />
-          </fieldset>
+          <input class="popup__input popup__input_value_img-title" type="text" placeholder="Название" name="img-title" />
+          <input class="popup__input popup__input_value_img-link" type="text" placeholder="Ссылка на картинку" name="img-link" />
           <button class="popup__btn" type="submit">Создать</button>
         </form>
-        <button class="popup__close-btn" type="button" aria-label="Закрыть всплывающее окно"></button>
+        <button class="popup__close-btn" type="button" aria-label="Закрыть всплывающее окно" data-popup="addCard"></button>
       </div>
     </div>
-    <template id="popup-view-image">
-      <div class="popup popup_type_view-image">
-        <figure class="popup__view-image-figure">
-          <img src="#" alt="" class="popup__view-image-item" />
-          <figcaption class="popup__view-image-figcaption"></figcaption>
-          <button class="popup__close-btn" type="button" aria-label="Закрыть всплывающее окно!"></button>
-        </figure>
-      </div>
+    <div class="popup popup_type_view-image">
+      <figure class="popup__view-image-figure">
+        <img src="#" alt="" class="popup__view-image-item" />
+        <figcaption class="popup__view-image-figcaption"></figcaption>
+        <button class="popup__close-btn" type="button" aria-label="Закрыть всплывающее окно" data-popup="viewImage"></button> 
+      </figure>
+    </div>
     </template>
-    
     <script src="./scripts/index.js"></script>
   </body>
 </html>
