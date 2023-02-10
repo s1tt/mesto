@@ -7,7 +7,8 @@ const pageElements = {
 
 const popups = {
   editProfile: document.querySelector('.popup_type_edit-profile'),
-  addCard: document.querySelector('.popup_type_add-card')
+  addCard: document.querySelector('.popup_type_add-card'),
+  viewImage: document.querySelector('.popup_type_view-image')
 };
 
 const popupForms = {
@@ -37,15 +38,17 @@ const profile = {
 };
 
 const templates = {
-  cardTemplate: document.querySelector('#card').content,
-  popupViewImageTemplate: document.querySelector('#popup-view-image')
+  cardTemplate: document.querySelector('#card').content
+  // popupViewImageTemplate: document.querySelector('#popup-view-image')
 };
 
-const popupViewImage = {
-  popup: templates.popupViewImageTemplate.content.querySelector('.popup_type_view-image'),
-  img: templates.popupViewImageTemplate.content.querySelector('.popup__view-image-item'),
-  figcaption: templates.popupViewImageTemplate.content.querySelector('.popup__view-image-figcaption')
-};
+const imgForpopup = popups.viewImage.querySelector('.popup__view-image-item');
+
+// const popupViewImage = {
+//   popup: templates.popupViewImageTemplate.content.querySelector('.popup_type_view-image'),
+//   img: templates.popupViewImageTemplate.content.querySelector('.popup__view-image-item'),
+//   figcaption: templates.popupViewImageTemplate.content.querySelector('.popup__view-image-figcaption')
+// };
 
 //Массив со стандартными картинками
 const initialCards = [
@@ -75,18 +78,21 @@ const initialCards = [
   }
 ];
 
-//Открыть попап
-function openPopupAddCard() {
-  popups.addCard.classList.add('popup_opened');
-  popups.addCard.classList.remove('popup_closed');
+// function openPopup(popup) {
+//   popup.classList.add('popup_opened');
+//   popup.classList.remove('popup_closed');
+// }
+
+// function closePopup(popup) {
+//   popup.classList.remove('popup_opened');
+//   popup.classList.add('popup_closed');
+// }
+
+function togglePopup(popup, state) {
+  popup.classList.toggle('popup_opened', state);
+  popup.classList.toggle('popup_closed', !state);
 }
 
-function openPopupEditProfile() {
-  popups.editProfile.classList.add('popup_opened');
-  popups.editProfile.classList.remove('popup_closed');
-  formElements.editProfile.name.value = profile.name.textContent;
-  formElements.editProfile.job.value = profile.job.textContent;
-}
 //Закрыть попап
 function closePopupEditProfile() {
   popups.editProfile.classList.remove('popup_opened');
@@ -96,6 +102,11 @@ function closePopupEditProfile() {
 function closePopupAddCard() {
   popups.addCard.classList.remove('popup_opened');
   popups.addCard.classList.add('popup_closed');
+}
+
+function closePopupViewImage() {
+  popups.viewImage.classList.remove('popup_opened');
+  popups.viewImage.classList.add('popup_closed');
 }
 
 //Отправка формы редактирования профиля
@@ -145,45 +156,48 @@ function addPicturesFromArray(arr) {
 }
 addPicturesFromArray(initialCards);
 
-//Открытие попапа с картинками
-function openPopupViewImage(e) {
-  if (e.target.classList.contains('element__img')) {
-    popupViewImage.img.src = e.target.src;
-    popupViewImage.img.alt = e.target.alt;
-    popupViewImage.figcaption.textContent = e.target.alt;
-
-    const popupCloned = popupViewImage.popup.cloneNode(true);
-    pageElements.page.appendChild(popupCloned);
-
-    setTimeout(() => {
-      popupCloned.classList.add('popup_opened');
-      popupCloned.classList.remove('popup_closed');
-    }, 1);
-
-    const closeBtnCloned = popupCloned.querySelector('.popup__close-btn');
-    closeBtnCloned.addEventListener('click', function () {
-      closeViewPopup(popupCloned);
-    });
-  }
-}
-
-//Закрытие попапа с картинками
-function closeViewPopup(popupCloned) {
-  popupCloned.classList.remove('popup_opened');
-  popupCloned.classList.add('popup_closed');
-
-  setTimeout(() => {
-    popupCloned.remove();
-  }, 1000);
-}
-
 //обработчики на открытие попапов
-pageElements.btnEditProfile.addEventListener('click', openPopupEditProfile);
-pageElements.btnAddImage.addEventListener('click', openPopupAddCard);
+// pageElements.btnEditProfile.addEventListener('click', () => {
+//   openPopup(popups.editProfile);
+//   formElements.editProfile.name.value = profile.name.textContent;
+//   formElements.editProfile.job.value = profile.job.textContent;
+// });
+
+// pageElements.btnAddImage.addEventListener('click', () => {
+//   openPopup(popups.addCard);
+// });
+
+// pageElements.elements.addEventListener('click', e => {
+//   openPopup(popups.viewImage);
+//   imgForpopup.src = e.target.src;
+// });
+
+pageElements.btnEditProfile.addEventListener('click', () => {
+  togglePopup(popups.editProfile, true);
+  formElements.editProfile.name.value = profile.name.textContent;
+  formElements.editProfile.job.value = profile.job.textContent;
+});
+
+pageElements.btnAddImage.addEventListener('click', () => {
+  togglePopup(popups.addCard, true);
+});
+
+pageElements.elements.addEventListener('click', e => {
+  togglePopup(popups.viewImage, true);
+  imgForpopup.src = e.target.src;
+});
 
 //обработчики на закрытие попапов
-closePopupBtns.buttonsArray[0].addEventListener('click', closePopupEditProfile);
-closePopupBtns.buttonsArray[1].addEventListener('click', closePopupAddCard);
+// closePopupBtns.buttonsArray[0].addEventListener('click', closePopupEditProfile);
+// closePopupBtns.buttonsArray[1].addEventListener('click', closePopupAddCard);
+// closePopupBtns.buttonsArray[2].addEventListener('click', closePopupViewImage);
+
+closePopupBtns.buttonsArray.forEach(btn => {
+  btn.addEventListener('click', () => {
+    console.log(btn.dataset);
+    togglePopup(popups[btn.dataset.popup], false);
+  });
+});
 
 //обработчики на формы
 popupForms.editProfileForm.addEventListener('submit', submitPopupFormEditProfile);
