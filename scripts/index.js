@@ -114,7 +114,7 @@ function submitPopupFormAddImage() {
   return cardElement;
 }
 
-//Отображдение карточки, отправленное в форму
+//Отображдение картинки, отправленную в форму
 function showCardFromForm(evt) {
   evt.preventDefault();
   pageElements.sectionWithCards.prepend(submitPopupFormAddImage());
