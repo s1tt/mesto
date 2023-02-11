@@ -122,7 +122,6 @@ function showCardFromForm(evt) {
 
 //Кнопка лайка
 function likeCard(evt) {
-  console.log('Clisk!');
   evt.target.classList.toggle('element__like-btn_active');
 }
 
