@@ -73,8 +73,14 @@ const initialCards = [
   }
 ];
 
-function togglePopup(popup) {
-  popup.classList.toggle('popup_opened');
+//Функция открытия попапа
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+}
+
+//Функция закрытия попапа
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
 }
 
 //Отправка формы редактирования профиля
@@ -82,16 +88,33 @@ function submitPopupFormEditProfile(evt) {
   evt.preventDefault();
   profile.name.textContent = formElements.popupEditProfile.name.value;
   profile.job.textContent = formElements.popupEditProfile.job.value;
-  togglePopup(popups.popupEditProfile);
+  closePopup(popups.popupEditProfile);
 }
 
 //Функция создания карточки
 function createCardElement(item) {
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
-  cardElement.querySelector('.element__img').src = item.link;
-  cardElement.querySelector('.element__img').alt = item.name;
-  cardElement.querySelector('.element__title').textContent = item.name;
+  const imgForCardElement = cardElement.querySelector('.element__img');
+  const titleForCardElement = cardElement.querySelector('.element__title');
+
+  imgForCardElement.src = item.link;
+  imgForCardElement.alt = item.name;
+  titleForCardElement.textContent = item.name;
+
+  //Обработчик на кнопку лайка
   cardElement.querySelector('.element__like-btn').addEventListener('click', likeCard);
+
+  //Обработчик на удаление карточки
+  cardElement.querySelector('.element__trash-btn').addEventListener('click', deleteCard);
+
+  //Обработчик на открытие попапа для отображения картинок
+  imgForCardElement.addEventListener('click', () => {
+    openPopup(popups.popupViewImage);
+    popupViewImageInfo.img.src = imgForCardElement.src;
+    popupViewImageInfo.img.alt = imgForCardElement.alt;
+    popupViewImageInfo.figcaption.textContent = imgForCardElement.alt;
+  });
+
   return cardElement;
 }
 
@@ -110,7 +133,7 @@ function submitPopupFormAddImage() {
   });
   formElements.popupAddCard.link.value = '';
   formElements.popupAddCard.title.value = '';
-  togglePopup(popups.popupAddCard);
+  closePopup(popups.popupAddCard);
   return cardElement;
 }
 
@@ -120,7 +143,7 @@ function showCardFromForm(evt) {
   pageElements.sectionWithCards.prepend(submitPopupFormAddImage());
 }
 
-//Кнопка лайка
+//Добавление/удаление лайка
 function likeCard(evt) {
   evt.target.classList.toggle('element__like-btn_active');
 }
@@ -133,40 +156,28 @@ function deleteCard(evt) {
   }
 }
 
-//обработчики на открытие попапов
+//Обработчики на открытие попапов
 pageElements.btnEditProfile.addEventListener('click', () => {
-  togglePopup(popups.popupEditProfile);
+  openPopup(popups.popupEditProfile);
   formElements.popupEditProfile.name.value = profile.name.textContent;
   formElements.popupEditProfile.job.value = profile.job.textContent;
 });
 
 pageElements.btnAddImage.addEventListener('click', () => {
-  togglePopup(popups.popupAddCard);
+  openPopup(popups.popupAddCard);
 });
 
-pageElements.sectionWithCards.addEventListener('click', e => {
-  if (e.target.classList.contains('element__img')) {
-    togglePopup(popups.popupViewImage);
-    popupViewImageInfo.img.src = e.target.src;
-    popupViewImageInfo.img.alt = e.target.alt;
-    popupViewImageInfo.figcaption.textContent = e.target.alt;
-  }
-});
-
-//обработчики на закрытие попапов
+//Обработчик на закрытие попапов
 btnsForClosingPopups.buttonsArray.forEach(btn => {
+  console.log(btn.closest('.popup'));
   btn.addEventListener('click', () => {
-    const popup = popups[btn.dataset.popup];
-    togglePopup(popup);
+    closePopup(btn.closest('.popup'));
   });
 });
 
-//обработчики на формы
+//Обработчики на формы
 popupForms.formEditProfile.addEventListener('submit', submitPopupFormEditProfile);
 popupForms.formAddCard.addEventListener('submit', showCardFromForm);
-
-//обработчик на удаление карточки
-pageElements.sectionWithCards.addEventListener('click', deleteCard);
 
 //Устранение бага в хроме, когда transition срабатывает при загрузке страницы
 window.addEventListener('load', () => {
