@@ -150,10 +150,8 @@ function likeCard(evt) {
 
 //Удаление карточки
 function deleteCard(evt) {
-  if (evt.target.classList.contains('element__trash-btn')) {
-    const cardItem = evt.target.closest('.element');
-    cardItem.remove();
-  }
+  const cardItem = evt.target.closest('.element');
+  cardItem.remove();
 }
 
 //Обработчики на открытие попапов
