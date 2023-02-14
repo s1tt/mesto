@@ -177,7 +177,7 @@ btnsForClosingPopups.buttonsArray.forEach(btn => {
 popupForms.formEditProfile.addEventListener('submit', submitPopupFormEditProfile);
 popupForms.formAddCard.addEventListener('submit', showCardFromForm);
 
-//Устранение бага в хроме, когда transition срабатывает при загрузке страницы
+//Устранение бага в хроме, когда transition срабатывает при загрузке стрaницы
 window.addEventListener('load', () => {
   popups.popupContainers.forEach(popup => {
     popup.classList.remove('preload');
