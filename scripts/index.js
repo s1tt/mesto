@@ -167,9 +167,9 @@ pageElements.btnAddImage.addEventListener('click', () => {
 
 //Обработчик на закрытие попапов
 btnsForClosingPopups.buttonsArray.forEach(btn => {
-  console.log(btn.closest('.popup'));
+  const popup = btn.closest('.popup');
   btn.addEventListener('click', () => {
-    closePopup(btn.closest('.popup'));
+    closePopup(popup);
   });
 });
 
