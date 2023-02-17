@@ -41,7 +41,7 @@
     <div class="popup popup_type_edit-profile preload">
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form action="#" name="profileEditingForm" class="popup__form popup__form-edit">
+        <form action="#" name="profileEditingForm" class="popup__form popup__form-edit" novalidate>
           <label class="popup__input-field">
             <input id="name-input" class="popup__input popup__input_value_name" type="text" placeholder="Имя" name="name" minlength="2" maxlength="40" required />
             <span class="popup__input-error-message name-input-error"></span>
@@ -58,7 +58,7 @@
     <div class="popup popup_type_add-card preload">
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
-        <form action="#" name="imageAddingForm" class="popup__form popup__form-add">
+        <form action="#" name="imageAddingForm" class="popup__form popup__form-add" novalidate>
           <label class="popup__input-field">
             <input id="img-title-input" class="popup__input popup__input_value_img-title" type="text" placeholder="Название" name="img-title" minlength="2" maxlength="30" required />
             <span class="popup__input-error-message img-title-input-error"></span>
@@ -79,7 +79,8 @@
         <button class="popup__close-btn" type="button" aria-label="Закрыть всплывающее окно"></button>
       </figure>
     </div>
-    <script src="./scripts/index.js"></script>
+    <script type="module" src="./scripts/cards.js"></script>
+    <script type="module" src="./scripts/index.js"></script>
     <script src="./scripts/validate.js"></script>
   </body>
 </html>
