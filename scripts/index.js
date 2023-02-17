@@ -76,11 +76,31 @@ const initialCards = [
 //Функция открытия попапа
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+
+  popup.addEventListener('click', closePopupByOverlay);
+  document.addEventListener('keydown', closePopupOnEscape);
 }
 
 //Функция закрытия попапа
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupOnEscape);
+}
+
+//Функция закрытия попапа кликом на оверлей
+function closePopupByOverlay(evt) {
+  const popup = document.querySelector('.popup_opened');
+  if (!evt.target.closest('.popup__container') && !evt.target.closest('.popup__view-image-figure')) {
+    closePopup(popup);
+  }
+}
+
+// Функция закрытия попапа кнопкой ESC
+function closePopupOnEscape(evt) {
+  const popup = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') {
+    closePopup(popup);
+  }
 }
 
 //Отправка формы редактирования профиля
@@ -90,6 +110,13 @@ function submitPopupFormEditProfile(evt) {
   profile.job.textContent = formElements.popupEditProfile.job.value;
   closePopup(popups.popupEditProfile);
 }
+
+//Отображение имени и должности в попапе редактирования профиля
+function copyNameAndJobFromHTMLtoPopup() {
+  formElements.popupEditProfile.name.value = profile.name.textContent;
+  formElements.popupEditProfile.job.value = profile.job.textContent;
+}
+copyNameAndJobFromHTMLtoPopup();
 
 //Функция создания карточки
 function createCardElement(item) {
@@ -157,8 +184,8 @@ function deleteCard(evt) {
 //Обработчики на открытие попапов
 pageElements.btnEditProfile.addEventListener('click', () => {
   openPopup(popups.popupEditProfile);
-  formElements.popupEditProfile.name.value = profile.name.textContent;
-  formElements.popupEditProfile.job.value = profile.job.textContent;
+  // formElements.popupEditProfile.name.value = profile.name.textContent;
+  // formElements.popupEditProfile.job.value = profile.job.textContent;
 });
 
 pageElements.btnAddImage.addEventListener('click', () => {
