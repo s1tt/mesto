@@ -42,8 +42,14 @@
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
         <form action="#" name="profileEditingForm" class="popup__form popup__form-edit">
-          <input class="popup__input popup__input_value_name" type="text" placeholder="Имя" name="name" />
-          <input class="popup__input popup__input_value_job" type="text" placeholder="О себе" name="job" />
+          <label class="popup__input-field">
+            <input id="name-input" class="popup__input popup__input_value_name" type="text" placeholder="Имя" name="name" minlength="2" maxlength="40" required />
+            <span class="popup__input-error-message name-input-error"></span>
+          </label>
+          <label class="popup__input-field">
+            <input id="job-input" class="popup__input popup__input_value_job" type="text" placeholder="О себе" name="job" minlength="2" maxlength="200" required />
+            <span class="popup__input-error-message job-input-error"></span>
+          </label>
           <button class="popup__btn" type="submit">Сохранить</button>
         </form>
         <button class="popup__close-btn" type="button" aria-label="Закрыть всплывающее окно"></button>
@@ -53,8 +59,14 @@
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
         <form action="#" name="imageAddingForm" class="popup__form popup__form-add">
-          <input class="popup__input popup__input_value_img-title" type="text" placeholder="Название" name="img-title" />
-          <input class="popup__input popup__input_value_img-link" type="text" placeholder="Ссылка на картинку" name="img-link" />
+          <label class="popup__input-field">
+            <input id="img-title-input" class="popup__input popup__input_value_img-title" type="text" placeholder="Название" name="img-title" minlength="2" maxlength="30" required />
+            <span class="popup__input-error-message img-title-input-error">asd</span>
+          </label>
+          <label class="popup__input-field">
+            <input id="img-url-input" class="popup__input popup__input_value_img-link" type="url" placeholder="Ссылка на картинку" name="img-link" required />
+            <span class="popup__input-error-message img-url-input-error">asd</span>
+          </label>
           <button class="popup__btn" type="submit">Создать</button>
         </form>
         <button class="popup__close-btn" type="button" aria-label="Закрыть всплывающее окно"></button>
@@ -68,5 +80,6 @@
       </figure>
     </div>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
   </body>
 </html>
