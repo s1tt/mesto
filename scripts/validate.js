@@ -31,7 +31,7 @@ const showInputError = ({ formElement, inputElement, errorMessage, inputErrorCla
   errorElement.classList.add(errorClass);
 };
 
-//Скрыть ошибки инпута
+//Скрыть надписи ошибок инпута
 const hideInputError = ({ formElement, inputElement, inputErrorClass, errorClass }) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(inputErrorClass);
@@ -61,6 +61,7 @@ const enableValidation = ({ formSelector, inputSelector, submitButtonSelector, i
   formList.forEach(formElement => {
     formElement.addEventListener('submit', event => {
       event.preventDefault();
+      event.target.querySelector(submitButtonSelector).classList.add(inactiveButtonClass);
     });
     setEventListeners({ formElement, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass });
   });

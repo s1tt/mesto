@@ -1,3 +1,5 @@
+import { initialCards as arrayWithCards } from './cards.js';
+
 const pageElements = {
   page: document.querySelector('.page'),
   sectionWithCards: document.querySelector('.elements'),
@@ -44,67 +46,37 @@ const profile = {
 };
 
 const cardTemplate = document.querySelector('#card').content;
-
-//Массив со стандартными картинками
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+const cardElementTemplate = cardTemplate.querySelector('.element');
 
 //Функция открытия попапа
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-
-  popup.addEventListener('click', closePopupByOverlay);
-  document.addEventListener('keydown', closePopupOnEscape);
 }
 
 //Функция закрытия попапа
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupOnEscape);
 }
 
 //Функция закрытия попапа кликом на оверлей
-function closePopupByOverlay(evt) {
-  const popup = document.querySelector('.popup_opened');
-  if (!evt.target.closest('.popup__container') && !evt.target.closest('.popup__view-image-figure')) {
-    closePopup(popup);
+function handleClosePopupByOverlay(evt) {
+  if (evt.target.classList.contains('popup')) {
+    closePopup(evt.target);
   }
 }
 
 // Функция закрытия попапа кнопкой ESC
-function closePopupOnEscape(evt) {
-  const popup = document.querySelector('.popup_opened');
+function handleClosePopupOnEscape(evt) {
   if (evt.key === 'Escape') {
-    closePopup(popup);
+    const popup = document.querySelector('.popup_opened');
+    if (popup) {
+      closePopup(popup);
+    }
   }
 }
 
 //Отправка формы редактирования профиля
-function submitPopupFormEditProfile(evt) {
+function handleSubmitPopupFormEditProfile(evt) {
   evt.preventDefault();
   profile.name.textContent = formElements.popupEditProfile.name.value;
   profile.job.textContent = formElements.popupEditProfile.job.value;
@@ -120,7 +92,7 @@ copyNameAndJobFromHTMLtoPopup();
 
 //Функция создания карточки
 function createCardElement(item) {
-  const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
+  const cardElement = cardElementTemplate.cloneNode(true);
   const imgForCardElement = cardElement.querySelector('.element__img');
   const titleForCardElement = cardElement.querySelector('.element__title');
 
@@ -128,19 +100,22 @@ function createCardElement(item) {
   imgForCardElement.alt = item.name;
   titleForCardElement.textContent = item.name;
 
-  //Обработчик на кнопку лайка
-  cardElement.querySelector('.element__like-btn').addEventListener('click', likeCard);
-
-  //Обработчик на удаление карточки
-  cardElement.querySelector('.element__trash-btn').addEventListener('click', deleteCard);
-
-  //Обработчик на открытие попапа для отображения картинок
-  imgForCardElement.addEventListener('click', () => {
+  //Функция обработчика для открытия попапа просмотра картинок
+  function handleOpenPopupViewImage() {
     openPopup(popups.popupViewImage);
     popupViewImageInfo.img.src = imgForCardElement.src;
     popupViewImageInfo.img.alt = imgForCardElement.alt;
     popupViewImageInfo.figcaption.textContent = imgForCardElement.alt;
-  });
+  }
+
+  //Обработчик на кнопку лайка
+  cardElement.querySelector('.element__like-btn').addEventListener('click', handleLikeCard);
+
+  //Обработчик на удаление карточки
+  cardElement.querySelector('.element__trash-btn').addEventListener('click', handleDeleteCard);
+
+  //Обработчик на открытие попапа для отображения картинок
+  imgForCardElement.addEventListener('click', handleOpenPopupViewImage);
 
   return cardElement;
 }
@@ -150,7 +125,7 @@ function addPicturesFromArray(arr) {
   const cardElements = arr.map(item => createCardElement(item));
   pageElements.sectionWithCards.append(...cardElements);
 }
-addPicturesFromArray(initialCards);
+addPicturesFromArray(arrayWithCards);
 
 //Отправка формы добавления новой картинки
 function submitPopupFormAddImage() {
@@ -165,31 +140,35 @@ function submitPopupFormAddImage() {
 }
 
 //Отображдение картинки, отправленную в форму
-function showCardFromForm(evt) {
+function handleShowCardFromForm(evt) {
   evt.preventDefault();
   pageElements.sectionWithCards.prepend(submitPopupFormAddImage());
 }
 
 //Добавление/удаление лайка
-function likeCard(evt) {
+function handleLikeCard(evt) {
   evt.target.classList.toggle('element__like-btn_active');
 }
 
 //Удаление карточки
-function deleteCard(evt) {
+function handleDeleteCard(evt) {
   const cardItem = evt.target.closest('.element');
   cardItem.remove();
 }
 
-//Обработчики на открытие попапов
-pageElements.btnEditProfile.addEventListener('click', () => {
+//Функции обработчиков открытия попапов
+function handleEditProfileClick() {
   openPopup(popups.popupEditProfile);
   copyNameAndJobFromHTMLtoPopup();
-});
+}
 
-pageElements.btnAddImage.addEventListener('click', () => {
+function handleAddImageClick() {
   openPopup(popups.popupAddCard);
-});
+}
+
+//Обработчики на открытие попапов
+pageElements.btnEditProfile.addEventListener('click', handleEditProfileClick);
+pageElements.btnAddImage.addEventListener('click', handleAddImageClick);
 
 //Обработчик на закрытие попапов
 btnsForClosingPopups.buttonsArray.forEach(btn => {
@@ -200,8 +179,16 @@ btnsForClosingPopups.buttonsArray.forEach(btn => {
 });
 
 //Обработчики на формы
-popupForms.formEditProfile.addEventListener('submit', submitPopupFormEditProfile);
-popupForms.formAddCard.addEventListener('submit', showCardFromForm);
+popupForms.formEditProfile.addEventListener('submit', handleSubmitPopupFormEditProfile);
+popupForms.formAddCard.addEventListener('submit', handleShowCardFromForm);
+
+//Установка обработчика клика по оверлею
+popups.popupContainers.forEach(popup => {
+  popup.addEventListener('click', handleClosePopupByOverlay);
+});
+
+//Установка обработчика на закрытие попаов кнопкой ESC
+document.addEventListener('keydown', handleClosePopupOnEscape);
 
 //Устранение бага в хроме, когда transition срабатывает при загрузке стрaницы
 window.addEventListener('load', () => {
