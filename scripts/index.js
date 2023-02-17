@@ -184,8 +184,7 @@ function deleteCard(evt) {
 //Обработчики на открытие попапов
 pageElements.btnEditProfile.addEventListener('click', () => {
   openPopup(popups.popupEditProfile);
-  // formElements.popupEditProfile.name.value = profile.name.textContent;
-  // formElements.popupEditProfile.job.value = profile.job.textContent;
+  copyNameAndJobFromHTMLtoPopup();
 });
 
 pageElements.btnAddImage.addEventListener('click', () => {
