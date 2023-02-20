@@ -51,11 +51,17 @@ const cardElementTemplate = cardTemplate.querySelector('.element');
 //Функция открытия попапа
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+
+  //Установка обработчика на закрытие попаов кнопкой ESC
+  document.addEventListener('keydown', handleClosePopupOnEscape);
 }
 
 //Функция закрытия попапа
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+
+  //Удаление обработчика на закрытие попаов кнопкой ESC
+  document.removeEventListener('keydown', handleClosePopupOnEscape);
 }
 
 //Функция закрытия попапа кликом на оверлей
@@ -186,9 +192,6 @@ popupForms.formAddCard.addEventListener('submit', handleShowCardFromForm);
 popups.popupContainers.forEach(popup => {
   popup.addEventListener('click', handleClosePopupByOverlay);
 });
-
-//Установка обработчика на закрытие попаов кнопкой ESC
-document.addEventListener('keydown', handleClosePopupOnEscape);
 
 //Устранение бага в хроме, когда transition срабатывает при загрузке стрaницы
 window.addEventListener('load', () => {
