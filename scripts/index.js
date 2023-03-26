@@ -82,12 +82,12 @@ function addNewCard(cardInfo) {
   document.querySelector('.elements').prepend(card);
 }
 
-//берем данные для карточек из массива и добавляем их на сайт
+//Берем данные для карточек из массива и добавляем их на сайт
 initialCards.forEach(item => {
   addNewCard(item);
 });
 
-//обработчик открытия попапа картинки карточки
+//Обработчик открытия попапа картинки карточки
 function handleOpenPopup(name, link) {
   const popupForCard = document.querySelector('.popup_type_view-image');
   const imgInPopup = document.querySelector('.popup__view-image-item');
