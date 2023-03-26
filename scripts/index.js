@@ -1,4 +1,6 @@
 import { Card } from './Card.js';
+import { initialCards, settings } from './constants.js';
+import { FormValidator } from './FormValidator.js';
 
 const btnEditProfile = document.querySelector('.profile__edit-button');
 const btnAddImage = document.querySelector('.profile__add-button');
@@ -10,7 +12,7 @@ const popupAddCard = document.querySelector('.popup_type_add-card');
 const formEditProfile = popupEditProfile.querySelector('.popup__form-edit');
 const formAddCard = popupAddCard.querySelector('.popup__form-add');
 
-const buttonsArray = Array.from(document.querySelectorAll('.popup__close-btn'));
+const ArrayOfPopupCloseBtns = Array.from(document.querySelectorAll('.popup__close-btn'));
 
 const popupEditProfileName = document.querySelector('.popup__input_value_name');
 const popupEditProfileJob = document.querySelector('.popup__input_value_job');
@@ -48,18 +50,13 @@ function handleClosePopupByOverlay(evt) {
 function handleClosePopupOnEscape(evt) {
   if (evt.key === 'Escape') {
     const popup = document.querySelector('.popup_opened');
-    if (popup) {
-      closePopup(popup);
-    }
+    closePopup(popup);
   }
 }
 
 //Отправка формы редактирования профиля
 function handleSubmitPopupFormEditProfile(evt) {
   evt.preventDefault();
-  if (!popupEditProfileName || !popupEditProfileJob) {
-    return;
-  }
   profileName.textContent = popupEditProfileName.value;
   profileJob.textContent = popupEditProfileJob.value;
   closePopup(popupEditProfile);
@@ -75,16 +72,31 @@ copyNameAndJobFromHTMLtoPopup();
 //Отправка формы добавления новой картинки
 function submitPopupFormAddImage() {
   addNewCard({ name: popupAddCardTitle.value, link: popupAddCardLink.value });
-
-  popupAddCardLink.value = '';
-  popupAddCardTitle.value = '';
+  formAddCard.reset();
   closePopup(popupAddCard);
 }
 
 //Добавление карточки на сайт
 export function addNewCard(cardInfo) {
-  const card = new Card(cardInfo, '#card').generate();
+  const card = new Card(cardInfo, handleOpenPopup, '#card').generate();
   document.querySelector('.elements').prepend(card);
+}
+
+//берем данные для карточек из массива и добавляем их на сайт
+initialCards.forEach(item => {
+  addNewCard(item);
+});
+
+//обработчик открытия попапа картинки карточки
+function handleOpenPopup(name, link) {
+  const popupForCard = document.querySelector('.popup_type_view-image');
+  const imgInPopup = document.querySelector('.popup__view-image-item');
+  const figcaptionInPopup = document.querySelector('.popup__view-image-figcaption');
+
+  openPopup(popupForCard);
+  imgInPopup.src = link;
+  imgInPopup.alt = name;
+  figcaptionInPopup.textContent = name;
 }
 
 //Функции обработчиков открытия попапов
@@ -102,7 +114,7 @@ btnEditProfile.addEventListener('click', handleEditProfileClick);
 btnAddImage.addEventListener('click', handleAddImageClick);
 
 //Обработчик на закрытие попапов
-buttonsArray.forEach(btn => {
+ArrayOfPopupCloseBtns.forEach(btn => {
   const popup = btn.closest('.popup');
   btn.addEventListener('click', () => {
     closePopup(popup);
@@ -117,6 +129,18 @@ formAddCard.addEventListener('submit', submitPopupFormAddImage);
 popupContainers.forEach(popup => {
   popup.addEventListener('click', handleClosePopupByOverlay);
 });
+
+const validation = () => {
+  const formList = Array.from(document.querySelectorAll(settings.formSelector));
+
+  formList.forEach(formElement => {
+    const validator = new FormValidator(settings, formElement);
+    validator.enableValidation();
+  });
+};
+
+//запуск валидации после полной загрузки страницы
+window.addEventListener('load', validation);
 
 //Устранение бага в хроме, когда transition срабатывает при загрузке стрaницы
 window.addEventListener('load', () => {
