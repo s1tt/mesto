@@ -80,27 +80,3 @@ export class FormValidator {
     this._setEventListeners();
   }
 }
-<<<<<<< HEAD
-=======
-
-// const validation = () => {
-//   const settings = {
-//     formSelector: '.popup__form',
-//     inputSelector: '.popup__input',
-//     submitButtonSelector: '.popup__btn',
-//     inactiveButtonClass: 'popup__btn_disabled',
-//     inputErrorClass: 'popup__input_type_error',
-//     errorClass: 'popup__input-error-message_active'
-//   };
-
-//   const formList = Array.from(document.querySelectorAll(settings.formSelector));
-
-//   formList.forEach(formElement => {
-//     const validator = new FormValidator(settings, formElement);
-//     validator.enableValidation();
-//   });
-// };
-
-// window.addEventListener('load', validation);
-//asd
->>>>>>> develop
