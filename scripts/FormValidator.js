@@ -105,3 +105,4 @@ export class FormValidator {
 // };
 
 // window.addEventListener('load', validation);
+//asd
