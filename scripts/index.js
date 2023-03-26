@@ -23,7 +23,7 @@ const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 
 //Функция открытия попапа
-export function openPopup(popup) {
+function openPopup(popup) {
   popup.classList.add('popup_opened');
 
   //Установка обработчика на закрытие попаов кнопкой ESC
@@ -77,7 +77,7 @@ function submitPopupFormAddImage() {
 }
 
 //Добавление карточки на сайт
-export function addNewCard(cardInfo) {
+function addNewCard(cardInfo) {
   const card = new Card(cardInfo, handleOpenPopup, '#card').generate();
   document.querySelector('.elements').prepend(card);
 }
