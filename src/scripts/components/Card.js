@@ -1,10 +1,10 @@
-export class Card {
-  constructor(card, handleOpenPopup, selector) {
+export default class Card {
+  constructor(card, handleCardClick, selector) {
     this._name = card.name;
     this._link = card.link;
     this._selector = selector;
 
-    this._handleOpenPopup = handleOpenPopup;
+    this._handleOpenPopup = handleCardClick;
 
     // Найдем кнопку лайка и изображение один раз в конструкторе
     this._likeButton = null;

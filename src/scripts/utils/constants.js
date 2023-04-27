@@ -34,3 +34,20 @@ export const settings = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error-message_active'
 };
+
+export const cardListSection = '.elements';
+export const cardTemplate = '#card';
+
+export const popupWithImageSelector = '.popup_type_view-image';
+export const popupEditProfileSelector = '.popup_type_edit-profile';
+export const popupAddCardSelector = '.popup_type_add-card';
+export const profileNameSelector = '.profile__name';
+export const profileJobSelector = '.profile__job';
+
+export const btnEditProfile = document.querySelector('.profile__edit-button');
+export const btnAddImage = document.querySelector('.profile__add-button');
+
+export const popupContainers = document.querySelectorAll('.popup');
+
+export const popupEditProfileName = document.querySelector('.popup__input_value_name');
+export const popupEditProfileJob = document.querySelector('.popup__input_value_job');
