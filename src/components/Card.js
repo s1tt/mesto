@@ -1,10 +1,10 @@
 export default class Card {
   constructor(card, handleCardClick, selector) {
-    this._name = card.name;
+    this._title = card.name;
     this._link = card.link;
     this._selector = selector;
 
-    this._handleOpenPopup = handleCardClick;
+    this._handleCardClick = handleCardClick;
 
     // Найдем кнопку лайка и изображение один раз в конструкторе
     this._likeButton = null;
@@ -19,8 +19,8 @@ export default class Card {
     this._cardImage = cardElement.querySelector('.element__img');
 
     this._cardImage.src = this._link;
-    this._cardImage.alt = this._name;
-    cardElement.querySelector('.element__title').textContent = this._name;
+    this._cardImage.alt = this._title;
+    cardElement.querySelector('.element__title').textContent = this._title;
 
     return cardElement;
   }
@@ -29,7 +29,9 @@ export default class Card {
     // Используем сохраненные переменные для лайка и изображения
     this._likeButton.addEventListener('click', () => this._handleLike());
     this._element.querySelector('.element__trash-btn').addEventListener('click', () => this._handleDeleteCard());
-    this._cardImage.addEventListener('click', () => this._handleOpenPopup(this._name, this._link));
+    this._cardImage.addEventListener('click', () => {
+      this._handleCardClick(this._title, this._link);
+    });
   }
 
   _handleLike() {
