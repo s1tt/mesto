@@ -35,8 +35,8 @@ export const settings = {
   errorClass: 'popup__input-error-message_active'
 };
 
-export const cardListSection = '.elements';
-export const cardTemplate = '#card';
+export const cardListSectionSelector = '.elements';
+export const cardTemplateSelector = '#card';
 
 export const popupWithImageSelector = '.popup_type_view-image';
 export const popupEditProfileSelector = '.popup_type_edit-profile';
