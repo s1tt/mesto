@@ -3,6 +3,9 @@ export default class Popup {
     this._selector = selector;
     this._handleEscClose = this._handleEscClose.bind(this);
     this._popupElement = document.querySelector(this._selector);
+
+    this._btnEl = this._popupElement.querySelector('.popup__btn');
+    this._startBtnText = this._btnEl?.textContent;
   }
 
   //Обработчик закрытия попапа кнопкой ESC
@@ -26,6 +29,17 @@ export default class Popup {
 
     //Удаление слушателя на закрытие попаов кнопкой ESC
     document.removeEventListener('keydown', this._handleEscClose);
+  }
+
+  setLoadingBtnText() {
+    this._btnEl.classList.add('popup__btn_disabled2');
+    this._btnEl.textContent = 'Сохранение...';
+  }
+
+  setStartBtnText() {
+    this._btnEl.classList.remove('popup__btn_disabled2');
+    this._btnEl.textContent = this._startBtnText;
+    this.close();
   }
 
   setEventListeners() {
