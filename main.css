@@ -36,7 +36,6 @@
 .popup__input-error-message_active{opacity:1}
 .popup__btn{background-color:#000;border:none;border-radius:2px;color:#fff;font-size:18px;line-height:22px;margin-top:16px;padding:14px 0;text-align:center;width:100%}.popup__btn:hover{cursor:pointer;opacity:.8}@media screen and (max-width:600px){.popup__btn{font-size:14px;line-height:17px;margin-top:16px;padding:14px 82px}}
 .popup__btn_disabled{background-color:transparent;border:1px solid #000;color:#000;opacity:.2;pointer-events:none}.popup__btn_disabled:hover{cursor:default;opacity:.2}
-.popup__btn_disabled2{background-color:transparent;color:#000;opacity:.2;outline:1px solid #000;pointer-events:none}.popup__btn_disabled2:hover{cursor:default;opacity:.2}
 .popup__close-btn{background-color:transparent;background-image:url(039f1f5203f653b4bacd.svg);background-position:50%;background-repeat:no-repeat;border:none;cursor:pointer;height:32px;padding:0;position:absolute;right:-40px;top:-40px;width:32px}.popup__close-btn:hover{opacity:.6}@media screen and (max-width:600px){.popup__close-btn{background-size:contain;height:20px;right:0;top:-36px;width:20px}}
 .popup__input-field{display:flex;flex-direction:column;margin-bottom:0;position:relative}
 .popup__form-confirm-delete-card{margin-top:16px}
