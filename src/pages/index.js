@@ -5,7 +5,7 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import Api from '../components/Api.js';
-import { settings, cardListSectionSelector, cardTemplateSelector, btnEditProfile, btnAddImage, popupContainers, popupEditProfileName, popupEditProfileJob, profileNameSelector, profileJobSelector, popupWithImageSelector, popupEditProfileSelector, popupAddCardSelector, cohort, authorization, baseUrl, userAvatarEl, avatarBtn, popupChangeAvatarSelector, popupDeleteCardSelector } from '../utils/constants.js';
+import { settings, cardListSectionSelector, cardTemplateSelector, btnEditProfile, btnAddImage, popupContainers, profileNameSelector, profileJobSelector, popupWithImageSelector, popupEditProfileSelector, popupAddCardSelector, cohort, authorization, baseUrl, avatarBtn, avatarSelector, popupChangeAvatarSelector, popupDeleteCardSelector } from '../utils/constants.js';
 import UserInfo from '../components/UserInfo';
 import PopupWithConfirm from '../components/PopupWithConfirm';
 
@@ -13,7 +13,8 @@ import PopupWithConfirm from '../components/PopupWithConfirm';
 //Создаем пользователя
 const user = new UserInfo({
   userNameSelector: profileNameSelector,
-  userJobSelector: profileJobSelector
+  userJobSelector: profileJobSelector,
+  avatarSelector: avatarSelector
 });
 
 //Создаем попап просмотра картинок
@@ -23,11 +24,10 @@ const popupWithImage = new PopupWithImage(popupWithImageSelector);
 const popupEditUserInfo = new PopupWithForm({
   selector: popupEditProfileSelector,
   handleFormSubmit: formData => {
-    popupEditUserInfo.setLoadingBtnText();
-    api
+    return api
       .setUserInfo(formData.name, formData.job)
       .then(userInfo => user.setUserInfo(user.getUserId(), userInfo.name, userInfo.about))
-      .finally(() => popupEditUserInfo.setStartBtnText());
+      .catch(err => console.log('Error: ' + err));
   }
 });
 
@@ -35,11 +35,10 @@ const popupEditUserInfo = new PopupWithForm({
 const popupChangeUserAvatar = new PopupWithForm({
   selector: popupChangeAvatarSelector,
   handleFormSubmit: formData => {
-    popupChangeUserAvatar.setLoadingBtnText();
-    api
+    return api
       .changeUserAvatar(formData['img-link'])
-      .then(res => (userAvatarEl.src = res.avatar))
-      .finally(() => popupChangeUserAvatar.setStartBtnText());
+      .then(res => user.setUserAvatar(res.avatar))
+      .catch(err => console.log('Error: ' + err));
   }
 });
 
@@ -48,8 +47,7 @@ const popupAddNewCard = new PopupWithForm({
   selector: popupAddCardSelector,
   //Добавление новой карточки
   handleFormSubmit: formData => {
-    popupAddNewCard.setLoadingBtnText();
-    api
+    return api
       .addNewCard(formData['img-title'], formData['img-link'])
       .then(res => {
         cardList.addItem(
@@ -61,8 +59,7 @@ const popupAddNewCard = new PopupWithForm({
           })
         );
       })
-      .catch(res => console.log('Error: ' + res))
-      .finally(() => popupAddNewCard.setStartBtnText());
+      .catch(err => console.log('Error: ' + err));
   }
 });
 
@@ -92,17 +89,15 @@ const api = new Api({
 });
 
 //Инициализации юзера, добавление карточек из бэка на сайт
-api
-  .getUserInfo()
-  //Инициализация юзера
-  .then(userInfo => {
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userInfo, cards]) => {
+    //Инициализация юзера
     user.setUserInfo(userInfo._id, userInfo.name, userInfo.about);
-    userAvatarEl.src = userInfo.avatar;
+    user.setUserAvatar(userInfo.avatar);
+    //Добавление карточек
+    cardList.renderItems(cards);
   })
-  .then(() => {
-    //Добавление карточек только после инициализации юзера
-    api.getInitialCards().then(data => cardList.renderItems(data));
-  });
+  .catch(err => console.log('Error: ' + err));
 
 //Функция создания карточки
 function createNewCard(cardInfo) {
@@ -113,15 +108,21 @@ function createNewCard(cardInfo) {
 //Обработчик клика на лайк
 function handleLikeClick(cardId, isLiked, likeToggle) {
   if (isLiked) {
-    api.dislike(cardId).then(res => {
-      console.log(`Лайков на карте ${res.likes.length}`);
-      likeToggle(res.likes.length);
-    });
+    api
+      .dislike(cardId)
+      .then(res => {
+        console.log(`Лайков на карте ${res.likes.length}`);
+        likeToggle(res.likes.length);
+      })
+      .catch(err => console.log('Error: ' + err));
   } else {
-    api.like(cardId).then(res => {
-      console.log(`Лайков на карте ${res.likes.length}`);
-      likeToggle(res.likes.length);
-    });
+    api
+      .like(cardId)
+      .then(res => {
+        console.log(`Лайков на карте ${res.likes.length}`);
+        likeToggle(res.likes.length);
+      })
+      .catch(err => console.log('Error: ' + err));
   }
 }
 
@@ -129,12 +130,10 @@ function handleLikeClick(cardId, isLiked, likeToggle) {
 function handleConfirmDeleteCard(cardId, deleteCardFromFront) {
   popupDeleteCard.open();
   popupDeleteCard.submit(() => {
-    popupDeleteCard.setLoadingBtnText();
-    api
+    return api
       .deleteCard(cardId)
       .then(() => deleteCardFromFront())
-      .catch(res => console.log('Error' + res))
-      .finally(() => popupDeleteCard.setStartBtnText());
+      .catch(err => console.log('Error: ' + err));
   });
 }
 
@@ -145,20 +144,22 @@ function handleCardClick(title, link) {
 
 //Обработчик открытия попапа редактирования профиля
 function handleEditProfileClick() {
+  validation();
   const { name, job } = user.getUserInfo();
-  popupEditProfileName.value = name;
-  popupEditProfileJob.value = job;
   popupEditUserInfo.open();
+  popupEditUserInfo.setInputValues({ name, job });
 }
 
 //Обработчик открытия попапа добавления картинки
 function handleAddImageClick() {
   popupAddNewCard.open();
+  validation();
 }
 
 //Обработчик открытия попапа редактирования аватара
 function handleChangeAvatar() {
   popupChangeUserAvatar.open();
+  validation();
 }
 
 //Установка слушателей
@@ -168,13 +169,9 @@ avatarBtn.addEventListener('click', handleChangeAvatar);
 
 popupWithImage.setEventListeners();
 popupEditUserInfo.setEventListeners();
-// popupEditUserInfo.setLoadingBtnText();
 popupAddNewCard.setEventListeners();
-// popupAddNewCard.setLoadingBtnText();
 popupDeleteCard.setEventListeners();
-// popupDeleteCard.setLoadingBtnText();
 popupChangeUserAvatar.setEventListeners();
-// changeUserAvatar.setLoadingBtnText();
 
 const validation = () => {
   const formList = Array.from(document.querySelectorAll(settings.formSelector));
