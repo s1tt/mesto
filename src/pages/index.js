@@ -5,7 +5,7 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import Api from '../components/Api.js';
-import { settings, cardListSectionSelector, cardTemplateSelector, btnEditProfile, btnAddImage, popupContainers, profileNameSelector, profileJobSelector, popupWithImageSelector, popupEditProfileSelector, popupAddCardSelector, cohort, authorization, baseUrl, avatarBtn, avatarSelector, popupChangeAvatarSelector, popupDeleteCardSelector } from '../utils/constants.js';
+import { config, cardListSectionSelector, cardTemplateSelector, btnEditProfile, btnAddImage, popupContainers, profileNameSelector, profileJobSelector, popupWithImageSelector, popupEditProfileSelector, popupAddCardSelector, cohort, authorization, baseUrl, avatarBtn, avatarSelector, popupChangeAvatarSelector, popupDeleteCardSelector } from '../utils/constants.js';
 import UserInfo from '../components/UserInfo';
 import PopupWithConfirm from '../components/PopupWithConfirm';
 
@@ -144,7 +144,7 @@ function handleCardClick(title, link) {
 
 //Обработчик открытия попапа редактирования профиля
 function handleEditProfileClick() {
-  validation();
+  formValidators['profileEditingForm'].resetValidation();
   const { name, job } = user.getUserInfo();
   popupEditUserInfo.open();
   popupEditUserInfo.setInputValues({ name, job });
@@ -152,14 +152,14 @@ function handleEditProfileClick() {
 
 //Обработчик открытия попапа добавления картинки
 function handleAddImageClick() {
+  formValidators['imageAddingForm'].resetValidation();
   popupAddNewCard.open();
-  validation();
 }
 
 //Обработчик открытия попапа редактирования аватара
 function handleChangeAvatar() {
+  formValidators['changeAvatarForm'].resetValidation();
   popupChangeUserAvatar.open();
-  validation();
 }
 
 //Установка слушателей
@@ -173,17 +173,30 @@ popupAddNewCard.setEventListeners();
 popupDeleteCard.setEventListeners();
 popupChangeUserAvatar.setEventListeners();
 
-const validation = () => {
-  const formList = Array.from(document.querySelectorAll(settings.formSelector));
+const formValidators = {};
 
+const enableValidation = config => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach(formElement => {
-    const validator = new FormValidator(settings, formElement);
+    const validator = new FormValidator(config, formElement);
+    const formName = formElement.getAttribute('name');
+
+    formValidators[formName] = validator;
     validator.enableValidation();
   });
 };
 
-//запуск валидации
-validation();
+// const validation = () => {
+//   const formList = Array.from(document.querySelectorAll(settings.formSelector));
+
+//   formList.forEach(formElement => {
+//     const validator = new FormValidator(settings, formElement);
+//     validator.enableValidation();
+//   });
+// };
+
+// запуск валидации
+enableValidation(config);
 
 //Устранение бага в хроме, когда transition срабатывает при загрузке стрaницы
 window.addEventListener('load', () => {
