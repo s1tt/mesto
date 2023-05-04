@@ -12,8 +12,6 @@ export const cohort = 'cohort-65';
 export const authorization = '5434933f-246d-462e-b1e4-5ac522b47880';
 export const baseUrl = 'https://mesto.nomoreparties.co';
 
-export const userAvatarEl = document.querySelector('.profile__img');
-
 export const cardListSectionSelector = '.elements';
 export const cardTemplateSelector = '#card';
 
@@ -24,12 +22,10 @@ export const popupChangeAvatarSelector = '.popup_type_change-avatar';
 export const popupDeleteCardSelector = '.popup_type_confirm-delete-card';
 export const profileNameSelector = '.profile__name';
 export const profileJobSelector = '.profile__job';
+export const avatarSelector = '.profile__img';
 
 export const avatarBtn = document.querySelector('.profile__img-wrapper');
 export const btnEditProfile = document.querySelector('.profile__edit-button');
 export const btnAddImage = document.querySelector('.profile__add-button');
 
 export const popupContainers = document.querySelectorAll('.popup');
-
-export const popupEditProfileName = document.querySelector('.popup__input_value_name');
-export const popupEditProfileJob = document.querySelector('.popup__input_value_job');

@@ -5,20 +5,20 @@ export default class Api {
     this._token = options.headers.authorization;
   }
 
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  }
+
   //Запросить стартовые карточки с сервера
   getInitialCards() {
     return fetch(`${this._baseUrl}/v1/${this._cohort}/cards`, {
       headers: {
         authorization: this._token
       }
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch(err => console.log(err));
+    }).then(this._checkResponse);
   }
 
   //Запросить инфо о текущем пользователе
@@ -27,14 +27,7 @@ export default class Api {
       headers: {
         authorization: this._token
       }
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch(err => console.log(err));
+    }).then(this._checkResponse);
   }
 
   //Запрос на обновление инфо о текущем пользователе
@@ -49,14 +42,7 @@ export default class Api {
         name,
         about
       })
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch(err => console.log(err));
+    }).then(this._checkResponse);
   }
 
   //Запрос на добавление карточки
@@ -71,14 +57,7 @@ export default class Api {
         name,
         link
       })
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch(err => console.log(err));
+    }).then(this._checkResponse);
   }
 
   //Запрос на удаление карточки
@@ -89,14 +68,7 @@ export default class Api {
         authorization: this._token,
         'Content-Type': 'application/json'
       }
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch(err => console.log(err));
+    }).then(this._checkResponse);
   }
 
   //Запрос на установку лайка
@@ -107,14 +79,7 @@ export default class Api {
         authorization: this._token,
         'Content-Type': 'application/json'
       }
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch(err => console.log(err));
+    }).then(this._checkResponse);
   }
 
   //Запрос на снятие лайка
@@ -125,14 +90,7 @@ export default class Api {
         authorization: this._token,
         'Content-Type': 'application/json'
       }
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch(err => console.log(err));
+    }).then(this._checkResponse);
   }
 
   //Запрос на изменение аватара
@@ -146,13 +104,6 @@ export default class Api {
       body: JSON.stringify({
         avatar
       })
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch(err => console.log(err));
+    }).then(this._checkResponse);
   }
 }

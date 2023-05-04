@@ -1,7 +1,6 @@
 export default class Card {
   constructor(card, handleCardClick, hendleConfirmDeleteCard, handleLikeClick, selector, api, currentUserId) {
     this._isLiked = card.likes?.some(like => like._id === currentUserId) || false;
-    console.log(this._isLiked);
 
     this._title = card.name;
     this._link = card.link;
@@ -63,13 +62,10 @@ export default class Card {
 
   //Обработчик лайка
   _handleLike(countOfLikes) {
-    console.log(countOfLikes);
-    console.log(`До ${this._isLiked}`);
     this._isLiked = !this._isLiked;
     //обновление количества лайков на странице
     this._countOfLikes.textContent = countOfLikes;
     this._likeButton.classList.toggle('element__like-btn_active');
-    console.log(`После ${this._isLiked}`);
   }
 
   //Обработчик удаления карточкики
