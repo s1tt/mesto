@@ -1,4 +1,6 @@
 .element__like-btn {
+  position: relative;
+  bottom: 6px;
   padding: 0;
   border: none;
   background-color: transparent;

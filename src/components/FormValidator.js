@@ -70,6 +70,15 @@ export default class FormValidator {
     this._toggleButtonState();
   }
 
+  //сброс ошибок в валидации
+  resetValidation() {
+    this._toggleButtonState();
+
+    this._inputList.forEach(inputElement => {
+      this._hideInputError(inputElement);
+    });
+  }
+
   //Добавление обработчиков всем формам
   enableValidation() {
     this._formElement.addEventListener('submit', event => {
